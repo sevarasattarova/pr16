@@ -5,59 +5,110 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:pr16.Views"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
-      Title="GamePage">
+      Title="GamePage" Background="#1e2a36">
 
-
-
-        <Grid Background="#1e2a36">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="2*"/>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
+    <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
+                <!-- название игры -->
+                <RowDefinition Height="Auto"/>
+                <!-- этаж и здоровье -->
                 <RowDefinition Height="*"/>
+                <!-- основная область -->
             </Grid.RowDefinitions>
 
-            <!-- Верхняя панель -->
-            <StackPanel Grid.Row="0" Grid.ColumnSpan="2" Orientation="Horizontal" 
-                    Background="#34495e" Padding="10">
-                <TextBlock Text="Этаж: " Foreground="White" FontSize="16"/>
-                <TextBlock x:Name="FloorText" Foreground="#f1c40f" FontSize="16" Margin="0,0,20,0"/>
-                <TextBlock Text="Здоровье: " Foreground="White" FontSize="16"/>
-                <TextBlock x:Name="HealthText" Foreground="#e74c3c" FontSize="16" Margin="0,0,20,0"/>
-                <TextBlock Text="Оружие: " Foreground="White" FontSize="16"/>
-                <TextBlock x:Name="WeaponText" Foreground="#f39c12" FontSize="16" Margin="0,0,20,0"/>
-                <TextBlock Text="Броня: " Foreground="White" FontSize="16"/>
-                <TextBlock x:Name="ArmorText" Foreground="#f39c12" FontSize="16"/>
-            </StackPanel>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1.5*"/>
+                <!-- инвентарь -->
+                <ColumnDefinition Width="3*"/>
+                <!-- игра -->
+                <ColumnDefinition Width="2*"/>
+                <!-- лог -->
+            </Grid.ColumnDefinitions>
 
-            <!-- Область битвы/события -->
-            <Border Grid.Row="1" Grid.Column="0" Background="#2c3e50" Margin="10" CornerRadius="10">
-                <StackPanel>
-                    <Image x:Name="EventImage" Source="/Images/chest.png" Width="200" Height="200" Margin="10"/>
-                    <TextBlock x:Name="EventDescription" Text="Нажмите 'Исследовать'" Foreground="White" 
-                           FontSize="18" TextAlignment="Center" Margin="10"/>
-                    <StackPanel x:Name="ActionPanel" Orientation="Horizontal" HorizontalAlignment="Center" Margin="10">
-                        <Button x:Name="ExploreButton" Content="Исследовать" Click="Explore_Click" 
-                            Width="120" Height="40" Margin="5" Background="#27ae60"/>
-                        <Button x:Name="AttackButton" Content="Атака" Click="Attack_Click" Visibility="Collapsed"
-                            Width="100" Height="40" Margin="5" Background="#e74c3c"/>
-                        <Button x:Name="DefendButton" Content="Защита" Click="Defend_Click" Visibility="Collapsed"
-                            Width="100" Height="40" Margin="5" Background="#f39c12"/>
-                        <Button x:Name="TakeButton" Content="Взять" Click="TakeItem_Click" Visibility="Collapsed"
-                            Width="100" Height="40" Margin="5" Background="#2ecc71"/>
-                        <Button x:Name="DiscardButton" Content="Выбросить" Click="DiscardItem_Click" Visibility="Collapsed"
-                            Width="100" Height="40" Margin="5" Background="#e67e22"/>
+            <!-- Название игры (верх, на всю ширину) -->
+            <Border Grid.Row="0" Grid.ColumnSpan="3" Background="#34495e" Padding="10">
+                <TextBlock Text="БИТВА СИЛЬНЕЙШИХ" FontSize="24" FontWeight="Bold"
+                       Foreground="FloralWhite" HorizontalAlignment="Center"/>
+            </Border>
+
+            <!-- Строка статуса: этаж и здоровье -->
+            <Border Grid.Row="1" Grid.ColumnSpan="3" Background="#2c3e50" Padding="10">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <StackPanel Grid.Column="0" Orientation="Horizontal" HorizontalAlignment="Left">
+                        <TextBlock Text="Этаж: " Foreground="FloralWhite" FontSize="18"/>
+                        <TextBlock x:Name="FloorText" Foreground="#f1c40f" FontSize="18" FontWeight="Bold"/>
                     </StackPanel>
+                    <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right">
+                    <TextBlock Text="Здоровье: " Foreground="FloralWhite" FontSize="18"/>
+                        <TextBlock x:Name="HealthText" Foreground="#e74c3c" FontSize="18" FontWeight="Bold"/>
+                    </StackPanel>
+                </Grid>
+            </Border>
+
+            <!-- ЛЕВАЯ ПАНЕЛЬ: ИНВЕНТАРЬ (оружие и броня) -->
+            <Border Grid.Row="2" Grid.Column="0" Background="#1e2a36" Margin="10" CornerRadius="10">
+                <StackPanel Margin="10">
+                <TextBlock Text="ИНВЕНТАРЬ" FontSize="20" FontWeight="Bold" Foreground="FloralWhite" 
+                           HorizontalAlignment="Center" Margin="0,0,0,15"/>
+                    <Border Background="#34495e" Padding="10" CornerRadius="8" Margin="0,5">
+                        <StackPanel>
+                            <TextBlock Text="ОРУЖИЕ" Foreground="#bdc3c7" FontSize="14"/>
+                            <TextBlock x:Name="WeaponText" Foreground="White" FontSize="16" FontWeight="Bold" TextWrapping="Wrap"/>
+                        </StackPanel>
+                    </Border>
+                    <Border Background="#34495e" Padding="10" CornerRadius="8" Margin="0,5">
+                        <StackPanel>
+                            <TextBlock Text="БРОНЯ" Foreground="#bdc3c7" FontSize="14"/>
+                            <TextBlock x:Name="ArmorText" Foreground="White" FontSize="16" FontWeight="Bold" TextWrapping="Wrap"/>
+                        </StackPanel>
+                    </Border>
                 </StackPanel>
             </Border>
 
-            <!-- Лог событий -->
-            <Border Grid.Row="1" Grid.Column="1" Background="#34495e" Margin="10" CornernerRadius="10">
-                <ListBox x:Name="EventLogList" Background="Transparent" BorderThickness="0" 
-                     Foreground="White" FontSize="12" Margin="5"/>
+            <!-- ЦЕНТРАЛЬНАЯ ОБЛАСТЬ: САМА ИГРА (события, бой, картинка) -->
+            <Border Grid.Row="2" Grid.Column="1" Background="#2c3e50" Margin="10" CornerRadius="15">
+                <StackPanel>
+                    <Image x:Name="EventImage" Source="/Images/dungeon.png" Width="250" Height="250" 
+                       Margin="10" HorizontalAlignment="Center"/>
+                    <TextBlock x:Name="EventDescription" Text="Нажмите 'Исследовать'" Foreground="White" 
+                           FontSize="16" TextAlignment="Center" Margin="10" TextWrapping="Wrap"/>
+                    <WrapPanel HorizontalAlignment="Center" Margin="10">
+                        <Button x:Name="ExploreButton" Content="Исследовать" Click="Explore_Click" 
+                            Width="140" Height="45" Margin="5" Background="#27ae60" Foreground="White"
+                            FontSize="14" FontWeight="Bold"/>
+                        <Button x:Name="AttackButton" Content="Атака" Click="Attack_Click" Visibility="Collapsed"
+                            Width="100" Height="45" Margin="5" Background="#e74c3c" Foreground="White"
+                            FontSize="14" FontWeight="Bold"/>
+                        <Button x:Name="DefendButton" Content="Защита" Click="Defend_Click" Visibility="Collapsed"
+                            Width="100" Height="45" Margin="5" Background="#f39c12" Foreground="White"
+                            FontSize="14" FontWeight="Bold"/>
+                        <Button x:Name="TakeButton" Content="Взять" Click="TakeItem_Click" Visibility="Collapsed"
+                            Width="100" Height="45" Margin="5" Background="#2ecc71" Foreground="White"
+                            FontSize="14" FontWeight="Bold"/>
+                        <Button x:Name="DiscardButton" Content="Выбросить" Click="DiscardItem_Click" Visibility="Collapsed"
+                            Width="100" Height="45" Margin="5" Background="#e67e22" Foreground="White"
+                            FontSize="14" FontWeight="Bold"/>
+                    </WrapPanel>
+                </StackPanel>
+            </Border>
+
+            <!-- ПРАВАЯ ПАНЕЛЬ: ЛОГИРОВАНИЕ -->
+            <Border Grid.Row="2" Grid.Column="2" Background="#1e2a36" Margin="10" >
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                <TextBlock Text="ЖУРНАЛ СОБЫТИЙ" FontSize="18" FontWeight="Bold" Foreground="FloralWhite"
+                           HorizontalAlignment="Center" Margin="10,10,10,5"/>
+                    <ListBox x:Name="EventLogList" Grid.Row="1" Background="#2c3e50" BorderThickness="0" 
+                         Foreground="White" FontSize="12" Margin="10"/>
+                </Grid>
             </Border>
         </Grid>
     </Page>
