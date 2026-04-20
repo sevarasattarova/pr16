@@ -8,7 +8,12 @@
       d:DesignHeight="450" d:DesignWidth="800"
       Title="GameOverPage">
 
-    <Grid>
-        
-    </Grid>
-</Page>
+    <Grid Background="#2c3e50">
+            <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+                <TextBlock Text="ИГРА ОКОНЧЕНА" FontSize="32" FontWeight="Bold" Foreground="DarkRed" Margin="0,0,0,30"/>
+                <TextBlock Text="Вы погибли в подземелье..." FontSize="20" Foreground="White" Margin="0,0,0,30"/>
+                <Button Content="Начать заново" Click="Restart_Click" FontSize="18" Padding="15,5"
+                    Background="LightSlateGray" Foreground="White" BorderThickness="0"/>
+            </StackPanel>
+        </Grid>
+    </Page>

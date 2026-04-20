@@ -90,7 +90,6 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Models\Boss.cs" />
     <Compile Include="Models\Enemy.cs" />
     <Compile Include="Models\GameEngine.cs" />
     <Compile Include="Models\Item.cs" />
@@ -120,8 +119,11 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
-    <Folder Include="Images\" />
+    <Resource Include="Images\dungeon.png" />
+    <Resource Include="Images\chest.png" />
+    <Resource Include="Images\battle.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

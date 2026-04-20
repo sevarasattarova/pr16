@@ -24,5 +24,9 @@ namespace pr16.Views
         {
             InitializeComponent();
         }
+        private void Restart_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new GamePage());
+        }
     }
 }

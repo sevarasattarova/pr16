@@ -8,11 +8,11 @@ namespace pr16.Models
 {
     public abstract class Enemy
     {
-        public string Name { get; protected set; }
+        public string Name { get;  set; }
         public int Health { get; set; }
-        public int Attack { get; protected set; }
-        public int Defense { get; protected set; }
-        public bool IsBoss { get; protected set; } = false;
+        public int Attack { get;  set; }
+        public int Defense { get; set; }
+        public bool IsBoss { get; set; } = false;
 
         public abstract void ApplySpecialAbility(Player player, Random rng);
         public abstract int CalculateDamage(Player player, Random rng);
@@ -38,10 +38,7 @@ namespace pr16.Models
         {
             int dmg = Attack;
             if (rng.Next(100) < 20) // 20% крит
-            {
                 dmg *= 2;
-                return dmg;
-            }
             return dmg;
         }
 
@@ -61,7 +58,7 @@ namespace pr16.Models
 
         public override int CalculateDamage(Player player, Random rng)
         {
-            return Attack; // игнорирует броню в ApplyDamage
+            return Attack;
         }
 
         public override void ApplySpecialAbility(Player player, Random rng) { }
@@ -86,9 +83,7 @@ namespace pr16.Models
         public override void ApplySpecialAbility(Player player, Random rng)
         {
             if (rng.Next(100) < (IsBoss ? 25 : 15))
-            {
                 player.IsStunned = true;
-            }
         }
     }
 }
